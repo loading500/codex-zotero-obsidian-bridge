@@ -1,0 +1,63 @@
+name: Test, build, release, and publish updates
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+      - run: npm run build
+      - run: npm run updates
+      - name: Verify generated update hash
+        run: |
+          expected="$(cut -d' ' -f1 dist/codex-zotero-obsidian-bridge.xpi.sha256)"
+          actual="$(sha256sum codex-zotero-obsidian-bridge.xpi | cut -d' ' -f1)"
+          test "$expected" = "$actual"
+          node -e 'const u=require("./dist/updates.json");const x=Object.values(u.addons)[0].updates[0];if(x.update_hash!==`sha256:${process.argv[1]}`)process.exit(1)' "$actual"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bridge-xpi
+          path: |
+            codex-zotero-obsidian-bridge.xpi
+            dist/codex-zotero-obsidian-bridge.xpi.sha256
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            codex-zotero-obsidian-bridge.xpi
+            dist/codex-zotero-obsidian-bridge.xpi.sha256
+          generate_release_notes: true
+
+  pages:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy update manifest
+        id: deployment
+        uses: actions/deploy-pages@v4
