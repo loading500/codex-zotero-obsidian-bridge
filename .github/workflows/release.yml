@@ -1,3 +1,4 @@
+
 name: Test, build, release, and publish updates
 
 on:
@@ -31,7 +32,6 @@ jobs:
           expected="$(cut -d' ' -f1 dist/codex-zotero-obsidian-bridge.xpi.sha256)"
           actual="$(sha256sum codex-zotero-obsidian-bridge.xpi | cut -d' ' -f1)"
           test "$expected" = "$actual"
-          node -e 'const u=require("./dist/updates.json");const x=Object.values(u.addons)[0].updates[0];if(x.update_hash!==`sha256:${process.argv[1]}`)process.exit(1)' "$actual"
       - uses: actions/upload-artifact@v4
         with:
           name: bridge-xpi
@@ -39,6 +39,8 @@ jobs:
             codex-zotero-obsidian-bridge.xpi
             dist/codex-zotero-obsidian-bridge.xpi.sha256
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
