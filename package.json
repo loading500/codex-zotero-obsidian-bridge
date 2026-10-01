@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "test": "node test-core.js",
-    "build": "./build.sh",
+    "build": "sh build.sh",
     "updates": "node scripts/make-updates.js"
   },
   "engines": {
