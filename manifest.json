@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Codex Zotero–Obsidian Bridge",
+  "version": "0.2.0",
+  "description": "Open and incrementally update Codex-managed Obsidian literature notes from Zotero.",
+  "author": "Codex Zotero–Obsidian Bridge contributors",
+  "applications": {
+    "zotero": {
+      "id": "codex-zotero-obsidian-bridge@local",
+      "update_url": "https://loading500.github.io/codex-zotero-obsidian-bridge/updates.json",
+      "strict_min_version": "9.0",
+      "strict_max_version": "9.0.*"
+    }
+  }
+}

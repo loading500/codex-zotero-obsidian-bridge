@@ -1,0 +1,15 @@
+#codex-zotero-obsidian-toolbar-button,
+#codex-zotero-obsidian-itemmenu {
+  list-style-image: url("icons/obsidian-black.svg");
+}
+
+#codex-zotero-obsidian-toolbar-button {
+  -moz-context-properties: fill, fill-opacity;
+  fill: #111;
+}
+
+@media (prefers-color-scheme: dark) {
+  #codex-zotero-obsidian-toolbar-button {
+    filter: invert(1);
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "codex-zotero-obsidian-bridge",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "test": "node test-core.js",
+    "build": "./build.sh",
+    "updates": "node scripts/make-updates.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

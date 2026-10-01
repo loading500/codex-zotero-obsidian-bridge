@@ -1,0 +1,5 @@
+codex-zotero-obsidian-bridge.xpi
+dist/
+*.sha256
+.DS_Store
+codex-zotero-obsidian-routes.json
