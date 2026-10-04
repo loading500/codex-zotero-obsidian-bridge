@@ -1,6 +1,6 @@
 # Codex Zotero–Obsidian Bridge
 
-A local Zotero 9 plugin for opening, creating, and incrementally updating Obsidian literature notes. It can run beside other Zotero plugins and only rewrites its own marked block.
+A local Zotero 9–10 plugin for opening, creating, and incrementally updating Obsidian literature notes. It can run beside other Zotero plugins and only rewrites its own marked block.
 
 ## Routing
 
