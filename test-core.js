@@ -1,5 +1,16 @@
 const assert = require("node:assert/strict");
+const manifest = require("./manifest.json");
+const packageMetadata = require("./package.json");
 const core = require("./bridge-core.js");
+
+assert.equal(manifest.version, packageMetadata.version);
+assert.equal(manifest.version, "0.2.1");
+assert.equal(manifest.applications.zotero.strict_min_version, "9.0");
+assert.equal(manifest.applications.zotero.strict_max_version, "10.0.*");
+assert.equal(
+  manifest.applications.zotero.update_url,
+  "https://github.com/loading500/codex-zotero-obsidian-bridge/releases/latest/download/updates.json"
+);
 
 const original = `---
 title: "Paper"

@@ -42,7 +42,9 @@ node test-core.js
 ./build.sh
 ```
 
-`preflight.js` and `impact-preflight.js` are local diagnostic utilities and are excluded from release builds. Zotero `9.0.*` is the only declared compatibility range.
+`preflight.js` and `impact-preflight.js` are local diagnostic utilities and are excluded from release builds. Version 0.2.1 is verified with Zotero `9.0.*` and `10.0.*`; the manifest therefore declares compatibility from Zotero 9.0 through 10.0.x.
+
+The automatic update manifest is published as the stable `updates.json` asset on the latest GitHub Release. Users upgrading from 0.2.0 need one manual 0.2.1 installation because the earlier GitHub Pages update URL was never available; subsequent releases can update through the release asset.
 
 ## License
 
